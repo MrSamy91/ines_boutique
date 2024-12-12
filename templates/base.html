@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ines Boutique</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="{{ url_for('gestion_articles') }}">Gestion des Articles</a>
+                <a href="{{ url_for('about') }}">À propos</a>
+                <!-- Autres liens existants -->
+            </div>
+            <a href="{{ url_for('index') }}" class="nav-brand">Ines Boutique</a>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Accueil</a>
+                {% if current_user and current_user.is_admin %}
+                    <a href="{{ url_for('gestion_articles') }}" class="nav-button">Gérer les Articles</a>
+                {% endif %}
+                {% if current_user %}
+                    <a href="{{ url_for('logout') }}">Déconnexion</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Connexion</a>
+                    <a href="{{ url_for('register') }}">Inscription</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html> 

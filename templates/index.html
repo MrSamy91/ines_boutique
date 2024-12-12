@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block nav_marques %}
+<div class="dropdown">
+    <a href="#" class="dropdown-trigger">Nos marques</a>
+    <div class="dropdown-content">
+        <a href="{{ url_for('index') }}">Toutes les marques</a>
+        {% for marque in marques %}
+        <a href="{{ url_for('index', marque=marque[0]) }}">{{ marque[0] }}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="articles-grid">
+    {% if articles %}
+        {% for article in articles %}
+        <div class="article-box" onclick="openModal({{ article.id }})">
+            <img src="{{ url_for('static', filename=article.image) }}" alt="{{ article.nom }}">
+            <div class="article-info">
+                <h2>{{ article.nom }}</h2>
+                <p class="marque">{{ article.marque }}</p>
+                <p>{{ article.description }}</p>
+                <p class="prix">{{ article.prix }} €</p>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <img src="{{ url_for('static', filename='images/empty.png') }}" alt="Aucun article">
+            <h2>Oups ! Nous n'avons plus d'articles en stock</h2>
+            <p>Revenez plus tard pour découvrir nos nouveautés</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Modal pour l'article -->
+<div id="articleModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img id="modalImage" src="" alt="">
+            </div>
+            <div class="modal-info">
+                <h2 id="modalTitle"></h2>
+                <p id="modalMarque" class="marque"></p>
+                <p id="modalDescription"></p>
+                <p id="modalPrix" class="prix"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const modal = document.getElementById('articleModal');
+const articles = {
+    {% for article in articles %}
+    {{ article.id }}: {
+        image: "{{ url_for('static', filename=article.image) }}",
+        nom: "{{ article.nom }}",
+        marque: "{{ article.marque }}",
+        description: "{{ article.description }}",
+        prix: "{{ article.prix }}"
+    },
+    {% endfor %}
+};
+
+function openModal(articleId) {
+    const article = articles[articleId];
+    document.getElementById('modalImage').src = article.image;
+    document.getElementById('modalTitle').textContent = article.nom;
+    document.getElementById('modalMarque').textContent = article.marque;
+    document.getElementById('modalDescription').textContent = article.description;
+    document.getElementById('modalPrix').textContent = article.prix + ' €';
+    modal.style.display = 'block';
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+</script>
+{% endblock %} 

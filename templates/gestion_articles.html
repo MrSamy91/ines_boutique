@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="gestion-container">
+    <h1>Gestion des Articles</h1>
+    
+    <div class="gestion-options">
+        <div class="gestion-card">
+            <h2>Options de Gestion</h2>
+            <div class="gestion-buttons">
+                <a href="{{ url_for('ajouter_article') }}" class="btn-action btn-add">Ajouter un Article</a>
+            </div>
+        </div>
+
+        <div class="gestion-card">
+            <h2>Articles Existants</h2>
+            <div class="articles-list">
+                {% for article in articles %}
+                <div class="article-item">
+                    <img src="{{ url_for('static', filename=article.image) }}" alt="{{ article.nom }}">
+                    <div class="article-info">
+                        <h3>{{ article.nom }}</h3>
+                        <p class="marque">{{ article.marque }}</p>
+                        <p class="prix">{{ article.prix }} €</p>
+                    </div>
+                    <a href="{{ url_for('supprimer_article', id=article.id) }}" 
+                       class="btn-delete"
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">
+                        Supprimer
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

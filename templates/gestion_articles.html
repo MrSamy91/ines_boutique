@@ -17,11 +17,13 @@
             <div class="articles-list">
                 {% for article in articles %}
                 <div class="article-item">
-                    <img src="{{ url_for('static', filename=article.image) }}" alt="{{ article.nom }}">
-                    <div class="article-info">
-                        <h3>{{ article.nom }}</h3>
-                        <p class="marque">{{ article.marque }}</p>
-                        <p class="prix">{{ article.prix }} €</p>
+                    <div class="article-content">
+                        <img src="{{ url_for('static', filename=article.image) }}" alt="{{ article.nom }}">
+                        <div class="article-info">
+                            <h3>{{ article.nom }}</h3>
+                            <p class="marque">{{ article.marque }}</p>
+                            <p class="prix">{{ article.prix }} €</p>
+                        </div>
                     </div>
                     <a href="{{ url_for('supprimer_article', id=article.id) }}" 
                        class="btn-delete"

@@ -5,35 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KVIMS</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav>
-        <div class="nav-container">
-            <div class="nav-links left">
-                <a href="{{ url_for('index') }}">Accueil</a>
-                <div class="dropdown">
-                    <a href="#" class="dropdown-trigger">Nos marques</a>
-                    <div class="dropdown-content">
-                        <a href="{{ url_for('index') }}">Toutes les marques</a>
-                        {% for marque in marques %}
-                            <a href="{{ url_for('index', marque=marque[0]) }}">{{ marque[0] }}</a>
-                        {% endfor %}
+        <!-- Navigation bureau -->
+        <div class="desktop-nav">
+                <div class="nav-links left">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-trigger">Nos marques</a>
+                        <div class="dropdown-content">
+                            <a href="{{ url_for('index') }}">Toutes les marques</a>
+                            {% for marque in marques %}
+                                <a href="{{ url_for('index', marque=marque[0]) }}">{{ marque[0] }}</a>
+                            {% endfor %}
+                        </div>
                     </div>
+                    <a href="{{ url_for('about') }}">À propos</a>
                 </div>
-                <a href="{{ url_for('about') }}">À propos</a>
-            </div>
-
+                
             <a href="{{ url_for('index') }}" class="nav-brand">KVIMS</a>
-
-            <div class="nav-links right">
+            
+            <div class="nav-links">
                 {% if current_user %}
-                        <a href="{{ url_for('gestion_articles') }}" class="nav-button">Gérer les Articles</a>
+                    <a href="{{ url_for('gestion_articles') }}">Gérer le stock</a>
                     <a href="{{ url_for('logout') }}">Déconnexion</a>
                 {% else %}
                     <a href="{{ url_for('login') }}">Connexion</a>
                     <a href="{{ url_for('register') }}">Inscription</a>
                 {% endif %}
             </div>
+        </div>
+
+        <!-- Navigation mobile -->
+        <div class="nav-brand mobile">KVIMS</div>
+        <div class="mobile-nav">
+            {% if current_user %}
+                <a href="{{ url_for('gestion_articles') }}" class="mobile-nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Gérer</span>
+                </a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="mobile-nav-item">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Connexion</span>
+                </a>
+            {% endif %}
+            
+            <a href="{{ url_for('index') }}" class="mobile-nav-item">
+                <i class="fas fa-tags"></i>
+                <span>Nos marques</span>
+            </a>
+            
+            {% if current_user %}
+                <a href="{{ url_for('logout') }}" class="mobile-nav-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
+                </a>
+            {% else %}
+                <a href="{{ url_for('register') }}" class="mobile-nav-item">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Inscription</span>
+                </a>
+            {% endif %}
         </div>
     </nav>
 

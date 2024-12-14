@@ -3,24 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ines Boutique</title>
+    <title>KVIMS</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <nav>
         <div class="nav-container">
-            <div class="nav-links">
-                <a href="{{ url_for('gestion_articles') }}">Gestion des Articles</a>
-                <a href="{{ url_for('about') }}">À propos</a>
-                <!-- Autres liens existants -->
-            </div>
-            <a href="{{ url_for('index') }}" class="nav-brand">Ines Boutique</a>
-            <div class="nav-links">
+            <div class="nav-links left">
                 <a href="{{ url_for('index') }}">Accueil</a>
-                {% if current_user and current_user.is_admin %}
-                    <a href="{{ url_for('gestion_articles') }}" class="nav-button">Gérer les Articles</a>
-                {% endif %}
+                <div class="dropdown">
+                    <a href="#" class="dropdown-trigger">Nos marques</a>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('index') }}">Toutes les marques</a>
+                        {% for marque in marques %}
+                            <a href="{{ url_for('index', marque=marque[0]) }}">{{ marque[0] }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <a href="{{ url_for('about') }}">À propos</a>
+            </div>
+
+            <a href="{{ url_for('index') }}" class="nav-brand">KVIMS</a>
+
+            <div class="nav-links right">
                 {% if current_user %}
+                        <a href="{{ url_for('gestion_articles') }}" class="nav-button">Gérer les Articles</a>
                     <a href="{{ url_for('logout') }}">Déconnexion</a>
                 {% else %}
                     <a href="{{ url_for('login') }}">Connexion</a>

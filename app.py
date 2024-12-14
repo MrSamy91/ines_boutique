@@ -76,9 +76,21 @@ def inject_user():
 # Routes
 @app.route('/')
 def index():
-    articles = Article.query.all()
-    marques = db.session.query(Article.marque).distinct().all()
-    return render_template('index.html', articles=articles, marques=marques)
+    marque = request.args.get('marque')
+    try:
+        # Récupérer toutes les marques pour le menu
+        marques = db.session.query(Article.marque).distinct().all()
+        
+        # Filtrer les articles par marque si une marque est sélectionnée
+        if marque:
+            articles = Article.query.filter_by(marque=marque).all()
+        else:
+            articles = Article.query.all()
+            
+        return render_template('index.html', articles=articles, marques=marques)
+    except Exception as e:
+        print(f"Erreur : {e}")
+        return render_template('index.html', articles=[], marques=[])
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

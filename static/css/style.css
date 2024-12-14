@@ -5,15 +5,16 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Poppins', sans-serif;
+    background-color: #fdf2f8;
     line-height: 1.6;
+    color: #4a4a4a;
 }
 
 nav {
-    background-color: #333;
+    background-color: #fff;
     padding: 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(244, 114, 182, 0.1);
 }
 
 .nav-container {
@@ -25,27 +26,30 @@ nav {
 }
 
 .nav-brand {
-    color: white;
-    font-size: 1.5rem;
+    color: #f472b6;
+    font-size: 1.8rem;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .nav-links {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .nav-links a {
-    color: white;
+    color: #666;
     text-decoration: none;
     padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 .nav-links a:hover {
-    background-color: #555;
+    background-color: #fdf2f8;
+    color: #f472b6;
 }
 
 .nav-button {
@@ -189,30 +193,31 @@ main {
 /* Style moderne pour les cartes d'articles */
 .articles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     padding: 2rem;
+    animation: fadeIn 0.6s ease-out;
 }
 
 .article-box {
     background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(244, 114, 182, 0.15);
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     position: relative;
 }
 
 .article-box:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(244, 114, 182, 0.2);
 }
 
 .article-box img {
     width: 100%;
-    height: 300px;
+    height: 350px;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s ease;
 }
 
 .article-box:hover img {
@@ -220,36 +225,30 @@ main {
 }
 
 .article-info {
-    padding: 1.5rem;
-    position: relative;
+    padding: 1.8rem;
+    background: white;
 }
 
 .article-info h2 {
     font-size: 1.4rem;
     color: #333;
-    margin-bottom: 0.5rem;
-}
-
-.article-info .marque {
-    color: #e74c3c;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     font-weight: 600;
 }
 
-.article-info p {
-    color: #666;
-    font-size: 0.95rem;
-    line-height: 1.6;
+.article-info .marque {
+    color: #f472b6;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 .article-info .prix {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #2c3e50;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #333;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -260,7 +259,7 @@ main {
     display: block;
     width: 30px;
     height: 2px;
-    background-color: #e74c3c;
+    background-color: #f472b6;
 }
 
 /* Animation au chargement */
@@ -332,18 +331,19 @@ main {
     text-align: center;
     padding: 4rem 2rem;
     background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(244, 114, 182, 0.15);
 }
 
 .empty-state img {
-    width: 200px;
+    width: 250px;
     margin-bottom: 2rem;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .empty-state h2 {
-    color: #2c3e50;
+    color: #f472b6;
+    font-size: 1.8rem;
     margin-bottom: 1rem;
 }
 
@@ -365,14 +365,11 @@ main {
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 2rem;
-    width: 90%;
-    max-width: 1200px;
-    border-radius: 15px;
-    position: relative;
-    animation: modalFadeIn 0.3s ease;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2.5rem;
+    max-width: 1000px;
+    animation: modalSlide 0.4s ease-out;
 }
 
 .modal-body {
@@ -435,5 +432,174 @@ main {
     .modal-content {
         margin: 10% auto;
         padding: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes modalSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .articles-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+}
+
+/* Styles pour les formulaires de connexion et d'inscription */
+.login-form {
+    background: white;
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(244, 114, 182, 0.15);
+    animation: formSlideUp 0.5s ease-out;
+}
+
+.login-form h2 {
+    color: #f472b6;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.login-form div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.login-form label {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.login-form input {
+    padding: 1rem;
+    border: 2px solid #fdf2f8;
+    border-radius: 15px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #f472b6;
+    box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.1);
+}
+
+.login-form button {
+    background: #f472b6;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.login-form button:hover {
+    background: #ec4899;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(244, 114, 182, 0.3);
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.form-footer a {
+    color: #f472b6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.form-footer a:hover {
+    color: #ec4899;
+    text-decoration: underline;
+}
+
+.flash-message {
+    background-color: #fdf2f8;
+    color: #f472b6;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: 500;
+    border: 2px solid #f472b6;
+    animation: flashFade 0.3s ease-out;
+}
+
+@keyframes formSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes flashFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive pour les formulaires */
+@media (max-width: 480px) {
+    .login-form {
+        margin: 2rem 1rem;
+        padding: 2rem;
+    }
+
+    .login-form h2 {
+        font-size: 1.8rem;
     }
 }
